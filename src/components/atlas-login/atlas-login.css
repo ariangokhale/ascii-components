@@ -1,0 +1,136 @@
+.al {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 4vh, 40px);
+  padding: 24px 16px 40px;
+  background: var(--al-bg);
+  color: var(--al-fg);
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+.al-globe {
+  width: min(100%, 72vh, 760px);
+  animation: al-globe-in 1.4s cubic-bezier(0.2, 0.7, 0.1, 1) both;
+}
+
+@keyframes al-globe-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+.al-actions {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.al-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 168px;
+  height: 42px;
+  padding: 0 28px;
+  border: 1px solid color-mix(in oklab, var(--al-fg) 45%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--al-fg);
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background-color 0.18s,
+    color 0.18s,
+    border-color 0.18s;
+}
+
+.al-login:hover:not(:disabled) {
+  background: var(--al-fg);
+  border-color: var(--al-fg);
+  color: var(--al-bg);
+}
+
+.al-login:disabled {
+  cursor: progress;
+}
+
+.al-login:focus-visible,
+.al-swatch:focus-visible {
+  outline: 2px solid var(--al-accent);
+  outline-offset: 3px;
+}
+
+.al-spin {
+  display: inline-block;
+  width: 1ch;
+}
+
+.al-themes {
+  display: flex;
+  gap: 10px;
+}
+
+.al-swatch {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 38% 38%,
+    var(--sw-land) 0 26%,
+    var(--sw-ocean) 27% 52%,
+    var(--sw-bg) 53%
+  );
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--al-fg) 22%, transparent),
+    0 0 0 3px var(--al-bg);
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    box-shadow 0.2s;
+}
+
+.al-swatch:hover {
+  transform: scale(1.15);
+}
+
+.al-swatch[aria-checked="true"] {
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--al-fg) 22%, transparent),
+    0 0 0 3px var(--al-bg),
+    0 0 0 4px var(--al-fg);
+}
+
+/* Positioned so a message never shifts the layout. */
+.al-error {
+  position: absolute;
+  top: 100%;
+  margin: 14px 0 0;
+  width: max-content;
+  max-width: min(90vw, 360px);
+  text-align: center;
+  color: var(--al-accent);
+  font-size: 13.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-globe {
+    animation: none;
+  }
+  .al,
+  .al-swatch {
+    transition: none;
+  }
+}
