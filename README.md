@@ -48,7 +48,7 @@ Palette colors can be CSS variables, for example to follow your app's light and 
 
 ## AtlasLogin
 
-`src/components/atlas-login/` is a minimal login screen: the globe, a Login button and a row of theme swatches. The whole page takes its colors from the chosen palette, and the choice is remembered in localStorage.
+`src/components/atlas-login/` is a minimal login screen: the globe on the right, the wordmark, a Login button and a row of theme swatches on the left. It stacks on narrow screens. The whole page takes its colors from the chosen palette, and the choice is remembered in localStorage.
 
 ```tsx
 <AtlasLogin onLogin={() => auth.redirectToLogin()} />
@@ -56,6 +56,7 @@ Palette colors can be CSS variables, for example to follow your app's light and 
 
 | Prop | Default | Notes |
 | --- | --- | --- |
+| `title` | `"ATLAS"` | The wordmark |
 | `onLogin` | required | Return a promise to show a pending state. Throw an `Error` to show its message under the button |
 | `defaultPalette` | `"atlas"` | Used until the visitor picks one |
 | `palettes` | all eight | Which swatches to offer, in order |

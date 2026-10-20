@@ -1,36 +1,53 @@
 .al {
+  position: relative;
   min-height: 100dvh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: clamp(20px, 4vh, 40px);
-  padding: 24px 16px 40px;
+  padding: 48px clamp(24px, 7vw, 120px);
   background: var(--al-bg);
   color: var(--al-fg);
+  overflow: hidden;
+  isolation: isolate;
   transition:
     background-color 0.5s ease,
     color 0.5s ease;
 }
 
+/* The globe is the star: large, vertically centered, bleeding past the right edge. */
 .al-globe {
-  width: min(100%, 72vh, 760px);
-  animation: al-globe-in 1.4s cubic-bezier(0.2, 0.7, 0.1, 1) both;
+  position: absolute;
+  top: 50%;
+  right: -3vw;
+  width: min(60vw, 100vh);
+  transform: translateY(-50%);
+  z-index: -1;
+  animation: al-globe-in 1.6s cubic-bezier(0.2, 0.7, 0.1, 1) both;
 }
 
 @keyframes al-globe-in {
   from {
     opacity: 0;
-    transform: scale(0.96);
+    transform: translateY(-50%) scale(0.96);
   }
 }
 
-.al-actions {
+.al-panel {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 22px;
+  align-items: flex-start;
+  gap: 36px;
+}
+
+.al-title {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: clamp(44px, 7vw, 96px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.32em;
+  /* Cancels the tracking after the last letter so the word sits flush. */
+  margin-right: -0.32em;
 }
 
 .al-login {
@@ -79,6 +96,7 @@
 .al-themes {
   display: flex;
   gap: 10px;
+  margin-left: 4px;
 }
 
 .al-swatch {
@@ -117,12 +135,52 @@
 .al-error {
   position: absolute;
   top: 100%;
-  margin: 14px 0 0;
+  left: 0;
+  margin: 18px 0 0;
   width: max-content;
-  max-width: min(90vw, 360px);
-  text-align: center;
+  max-width: min(90vw, 320px);
   color: var(--al-accent);
   font-size: 13.5px;
+}
+
+@media (max-width: 800px) {
+  .al {
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 24px 16px 48px;
+  }
+  .al-globe {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: min(100%, 460px);
+    transform: none;
+    order: -1;
+    z-index: auto;
+    animation-name: al-globe-in-flow;
+  }
+  .al-panel {
+    align-items: center;
+    gap: 28px;
+  }
+  .al-title {
+    font-size: clamp(36px, 11vw, 56px);
+    margin-right: 0;
+    text-indent: 0.32em;
+  }
+  .al-error {
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+}
+
+@keyframes al-globe-in-flow {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

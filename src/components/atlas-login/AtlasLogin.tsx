@@ -5,6 +5,8 @@ import type { PaletteName } from "../ascii-globe";
 import "./atlas-login.css";
 
 export type AtlasLoginProps = {
+  /** Wordmark shown beside the globe. */
+  title?: string;
   /** Called by the Login button. Return a promise to show a pending state; throw to show an error. */
   onLogin: () => void | Promise<void>;
   /** Palette used before the visitor picks one. */
@@ -28,6 +30,7 @@ function readStored(key: string | null, allowed: PaletteName[]): PaletteName | n
 }
 
 export function AtlasLogin({
+  title = "ATLAS",
   onLogin,
   defaultPalette = "atlas",
   palettes = PALETTE_NAMES,
@@ -93,10 +96,12 @@ export function AtlasLogin({
   return (
     <main className="al" style={vars}>
       <div className="al-globe">
-        <AsciiGlobe palette={palette} speed={0.6} tilt={20} interactive decorative />
+        <AsciiGlobe palette={palette} speed={0.6} tilt={20} initialLongitude={-40} interactive decorative />
       </div>
 
-      <div className="al-actions">
+      <div className="al-panel">
+        <h1 className="al-title">{title}</h1>
+
         <button type="button" className="al-login" onClick={login} disabled={pending}>
           {pending ? (
             <>
