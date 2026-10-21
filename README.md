@@ -2,6 +2,8 @@
 
 Reusable React components drawn in text characters.
 
+![The Atlas login page: a rotating ASCII globe beside the ATLAS wordmark, cycling through the theme swatches](docs/login-demo.gif)
+
 ```bash
 npm install
 npm run dev
